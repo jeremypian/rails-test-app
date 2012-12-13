@@ -2,7 +2,7 @@ Testapp::Application.routes.draw do
   get "home/index"
 
   resources :items
-
+  match "/items/complete_task/:id" => "items#complete_task"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

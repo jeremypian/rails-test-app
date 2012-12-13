@@ -53,15 +53,18 @@ class ItemsController < ApplicationController
     end
   end
 
-  # PUT /items/completed/1
-  # PUT /items/completed/1.json
-  def mark_completed
-    @item = Item.find(param[:id])
-    @item.completed = 1
+  def complete_task
+    @item = Item.find(params[:id])
+    @item.completed = !@item.completed
     @item.save
+    if @item.completed
+      label = 'Completed'
+    else
+      label = 'Incomplete'
+    end
+
     respond_to do |format|
-      format.html { redirect_to items_url }
-      format.json { head :no_content }
+      format.html { render :text => label }
     end
   end
 
